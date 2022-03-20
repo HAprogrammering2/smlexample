@@ -1,6 +1,4 @@
-
-
-max 1 2;
+use "binary_tree.sml";
 
  val tree = tnil;
  val tree = insert tree 4;
@@ -14,6 +12,9 @@ max 1 2;
  val tree = insert tree 6;
  
 
+tree_to_string tree;
+
+
  find_min tree;
 
  delete tree 1;
@@ -24,7 +25,6 @@ max 1 2;
 
  nodes_on_level 1 (depth tree) tree;
  
- tree_to_string tree;
 
   Real.toInt IEEEReal.TO_NEAREST (Math.pow (2.0, (Real.fromInt (3 - 1))));
 

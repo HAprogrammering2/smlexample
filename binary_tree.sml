@@ -29,21 +29,21 @@ fun spaces 0 = ""
  |  spaces 1 = " "
  |  spaces n = " " ^ (spaces (n-1));
 
-fun left_padding level depth = (print ("left_padding "^Int.toString(level)^" "^Int.toString(depth)^"\n");  
-            (spaces (Real.toInt IEEEReal.TO_NEAREST (Math.pow (2.0, (Real.fromInt(depth - level - 1)))))));
-
-fun padding_children level depth = (print ("padding_children "^Int.toString(level)^" "^Int.toString(depth)^"\n"); 
-            (spaces ((Real.toInt IEEEReal.TO_NEAREST (Math.pow (2.0, (Real.fromInt(depth - level - 1)))))-1)));
+fun left_padding level depth = (spaces (Real.toInt IEEEReal.TO_NEAREST (Math.pow (2.0, (Real.fromInt(depth - level - 1))))));
 
 fun i2s i = Int.toString(i);
 
-fun nodes_on_level n d tnil = (print ("C1: n: "^Int.toString(n)^" r: tnil \n"); ".")
- |  nodes_on_level 0 d (node(left, r, right)) = (print ("C2: n: 0 r: "^Int.toString(r)^"\n"); Int.toString(r))
- |  nodes_on_level n d (node(left, r, right)) = (print ("C3: n: "^Int.toString(n)^" r: "^Int.toString(r)^"\n"); 
-            (nodes_on_level (n-1) d left) ^ (padding_children n d) ^ (nodes_on_level (n-1) d right));
+fun padding_children level depth = (print ("padding_children "^(i2s level)^" "^(i2s depth)^"\n");
+(spaces ((Real.toInt IEEEReal.TO_NEAREST (Math.pow (2.0, (Real.fromInt(depth - level)))))-1)));
 
-fun tree_to_string_help l d t = if (l = d) then "end" else (print ("tree_to_string_help "^(i2s l)^" "^(i2s d)^"\n") ;
-                            (left_padding l d) ^ (nodes_on_level l d t) ^ "\n" ^ (tree_to_string_help (l+1) d t));
+
+fun nodes_on_level 0 (d :int) (tnil: int tree) (p : string) =  "."
+ |  nodes_on_level n d tnil p = ((nodes_on_level (n-1) d tnil p) ^ p ^ "." ^ p ^ (nodes_on_level (n-1) d tnil p))
+ |  nodes_on_level 0 d (node(left, r, right)) p = Int.toString(r)
+ |  nodes_on_level n d (node(left, r, right)) p = (nodes_on_level (n-1) d left p) ^ p ^ (nodes_on_level (n-1) d right p);
+
+fun tree_to_string_help l d t = if (l = d) then "" else (print ("tree_to_string_help "^(i2s l)^" "^(i2s d)^"\n");
+(left_padding l d) ^ (nodes_on_level l d t (padding_children l d)) ^ "\n" ^ (tree_to_string_help (l+1) d t));
 
 fun tree_to_string t = print(tree_to_string_help 0 (depth t) t);
 
