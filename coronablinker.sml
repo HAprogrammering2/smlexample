@@ -1,3 +1,5 @@
+use "date.sml";
+
 local
 fun insert_in_order (dt, dv) [] = [(dt, dv)]
  |  insert_in_order (dt, dv) ((hdt, hdv)::t) = if (compare dt hdt) = date_after 
@@ -16,7 +18,6 @@ in
 fun remove_old list today = purge list (days_before today 21); 
 end;
 
-exception InvalidDate;
 
 fun add_device date device list = if date_valid date then (date, device) :: list else raise InvalidDate;
 
