@@ -9,33 +9,38 @@ use "binary_tree.sml";
  val tree = insert tree 2;
 
 
+ val tree = tnil;
+ val tree = insert tree 8;
+ val tree = insert tree 4;
+ val tree = insert tree 14;
+ val tree = insert tree 2;
  val tree = insert tree 6;
+ val tree = insert tree 16;
+ val tree = insert tree 12;
+
+ val tree = tnil;
+ val tree = insert tree 8;
+ val tree = insert tree 4;
+ val tree = insert tree 14;
+ val tree = insert tree 2;
+ val tree = insert tree 6;
+ val tree = insert tree 1;
+ val tree = insert tree 3;
+ val tree = insert tree 5;
+ val tree = insert tree 7;
+ val tree = insert tree 16;
+ val tree = insert tree 12;
+ val tree = insert tree 11;
+ val tree = insert tree 13;
+ val tree = insert tree 15;
+ val tree = insert tree 17;
  
 
-tree_to_string tree;
+print_tree tree;
 
+val tree = delete tree 8;
+val tree = delete tree 16;
 
- find_min tree;
+print_tree tree;
 
- delete tree 1;
-
- depth tree;
-
- spaces 5;
-
- nodes_on_level 1 (depth tree) tree;
- 
-
-  Real.toInt IEEEReal.TO_NEAREST (Math.pow (2.0, (Real.fromInt (3 - 1))));
-
- val level = 0;
- val depth = 4;
- padding_children 0 4;
-
-
-tree_to_string_help 4 4 tree;
-val l = 3;
-val d = 4;
-val t = tree;
-left_padding l d;
-nodes_on_level l d t;
+val str = "/   " ^ Char.toString(chr(92));
